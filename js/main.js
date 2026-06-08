@@ -79,38 +79,9 @@ function initHeaderScroll() {
     handleScroll(); // Run initially
 }
 
-// 4. Parallax Effect for Floating Code
+// 4. Parallax Effect removed — floating code now uses pure CSS animation
 function initParallax() {
-    const heroSection = document.querySelector('.hero-section');
-    const floatingElements = document.querySelectorAll('.floating-code');
-    if (!heroSection || floatingElements.length === 0) return;
-
-    heroSection.addEventListener('mousemove', (e) => {
-        const { clientX, clientY } = e;
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        
-        // Calculate offsets relative to center
-        const xOffset = (clientX - width / 2) / (width / 2);
-        const yOffset = (clientY - height / 2) / (height / 2);
-
-        floatingElements.forEach((el, index) => {
-            // Give different factors to elements for a 3D depth effect
-            const depthFactor = (index + 1) * 20;
-            const xTranslation = xOffset * depthFactor;
-            const yTranslation = yOffset * depthFactor;
-            
-            // Adjust original floating animation with parallax translate
-            el.style.transform = `translate(${xTranslation}px, ${yTranslation}px)`;
-        });
-    });
-
-    // Reset offsets on mouse leave
-    heroSection.addEventListener('mouseleave', () => {
-        floatingElements.forEach(el => {
-            el.style.transform = 'translate(0px, 0px)';
-        });
-    });
+    // Intentionally empty: floating code snippets use CSS @keyframes floatAnim only
 }
 
 // 5. Typewriter Effect
