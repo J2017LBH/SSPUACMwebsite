@@ -1790,19 +1790,27 @@ footer {
         padding-bottom: 30px;
     }
 
-    /* Horizontal card layout on mobile */
+    /* Vertical stacked card layout on mobile */
     .highlight-awards-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.5rem;
+    }
+
+    .highlight-award-card {
+        flex-direction: column !important;
+        height: auto;
     }
 
     .highlight-award-img-wrapper {
-        width: 25%;
-        min-width: 25%;
+        width: 100% !important;
+        min-width: 100% !important;
+        aspect-ratio: 16 / 10 !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-color) !important;
     }
 
     .highlight-award-content {
-        width: 75%;
+        width: 100% !important;
     }
 
     .highlight-award-desc {
@@ -1885,14 +1893,7 @@ footer {
         padding-bottom: 20px;
     }
 
-    .highlight-award-img-wrapper {
-        width: 22%;
-        min-width: 22%;
-    }
 
-    .highlight-award-content {
-        width: 78%;
-    }
 
     .highlight-award-card h3 {
         font-size: 0.82rem;
