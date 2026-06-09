@@ -19,22 +19,13 @@
     <section class="news-page-section" id="news-archive">
         <div class="container">
             <h2 class="section-title">动态公告</h2>
-            <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: -2rem auto 3rem;">获取最新的社团活动、赛事报名、算法讲座及寒暑假集训通知。</p>
-            
-            <!-- Category Filters -->
-            <div class="news-filters">
-                <button class="filter-btn active" data-filter="all">全部公告</button>
-                <button class="filter-btn" data-filter="recruit">协会招新</button>
-                <button class="filter-btn" data-filter="contest">赛事通知</button>
-                <button class="filter-btn" data-filter="training">集训辅导</button>
-            </div>
             
             <!-- News Cards Grid -->
             <div class="news-grid" id="news-archive-grid" style="display: flex; justify-content: center; width: 100%;">
                 <div class="glass-card" style="text-align: center; max-width: 500px; padding: 4rem 2rem; margin: 0 auto; width: 100%;">
                     <i class="fas fa-folder-open" style="font-size: 4rem; color: var(--primary-color); opacity: 0.4; margin-bottom: 1.5rem;"></i>
                     <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">暂无发布公告</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">协会目前暂无任何招新、赛事或集训相关的公告发布。当有最新消息时，我们将在此处第一时间进行发布，敬请关注！</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">当有最新消息时，我们将在此处第一时间进行发布，敬请关注！</p>
                 </div>
             </div>
         </div>
@@ -46,44 +37,5 @@
     <!-- Scripts -->
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
-    
-    <!-- Client-side filter script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Wait briefly to ensure navigation styling takes effect if components load fast
-            setTimeout(() => {
-                const filterBtns = document.querySelectorAll('.filter-btn');
-                const newsCards = document.querySelectorAll('.news-card-wrapper');
-                
-                filterBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        // Remove active class from all buttons
-                        filterBtns.forEach(b => b.classList.remove('active'));
-                        // Add active class to clicked button
-                        btn.classList.add('active');
-                        
-                        const filterVal = btn.getAttribute('data-filter');
-                        
-                        newsCards.forEach(card => {
-                            const category = card.getAttribute('data-category');
-                            if (filterVal === 'all' || category === filterVal) {
-                                card.style.display = 'block';
-                                setTimeout(() => {
-                                    card.style.opacity = '1';
-                                    card.style.transform = 'scale(1)';
-                                }, 50);
-                            } else {
-                                card.style.opacity = '0';
-                                card.style.transform = 'scale(0.95)';
-                                setTimeout(() => {
-                                    card.style.display = 'none';
-                                }, 200);
-                            }
-                        });
-                    });
-                });
-            }, 100);
-        });
-    </script>
 </body>
 </html>

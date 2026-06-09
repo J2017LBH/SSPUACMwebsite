@@ -65,8 +65,8 @@ function injectHeader() {
     const headerPlaceholder = document.getElementById('header-placeholder');
     if (!headerPlaceholder) return;
 
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
 
     const headerHTML = `
     <header id="main-header">
@@ -85,10 +85,6 @@ function injectHeader() {
                 </ul>
                 
                 <div class="nav-actions">
-                    <button class="theme-toggle-btn" id="theme-toggle" aria-label="切换主题">
-                        <i class="fas fa-moon"></i>
-                        <i class="fas fa-sun"></i>
-                    </button>
                     <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="打开菜单">
                         <i class="fas fa-bars"></i>
                     </button>
