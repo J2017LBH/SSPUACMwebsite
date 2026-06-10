@@ -1328,6 +1328,19 @@ footer {
 
 .alumni-card {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.alumni-card > div:last-child {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .alumni-avatar {
@@ -1950,4 +1963,28 @@ footer {
         gap: 1.5rem;
     }
 }
+
+/* --- Outstanding Alumni Grid Layout Fixes --- */
+.outstanding-alumni-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-auto-rows: 1fr !important;
+    gap: 2.5rem !important;
+}
+
+@media (max-width: 1024px) {
+    .outstanding-alumni-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .outstanding-alumni-grid {
+        grid-template-columns: 1fr !important;
+        grid-auto-rows: auto !important;
+        gap: 1.5rem !important;
+    }
+}
+
 
