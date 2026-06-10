@@ -28,7 +28,7 @@
                     <p>我们致力于在二工大推广算法与程序设计文化，汇聚对编程和逻辑思维充满热情的学子。无论你是零基础的新手，还是算法高手，在这里你都能找到施展才华的舞台。</p>
                     <div class="hero-cta">
                         <a href="about.html" class="btn btn-primary">开启算法之旅 <i class="fas fa-arrow-right"></i></a>
-                        <a href="#playground" class="btn btn-secondary">算法实验室</a>
+                        <a href="hall_of_fame.html" class="btn btn-secondary">荣誉殿堂</a>
                     </div>
                 </div>
                 
@@ -163,59 +163,7 @@
         </div>
     </section>
 
-    <!-- 4. Interactive Algorithm Visualizer Playground -->
-    <section class="playground-section" id="playground">
-        <div class="container">
-            <h2 class="section-title">算法实验室</h2>
-            <div class="playground-container">
-                <!-- Visualizer Panel -->
-                <div class="visualizer-pane">
-                    <div class="visualizer-header">
-                        <div class="visualizer-title">
-                            <h3>排序算法动态演练</h3>
-                            <p>实时观察算法的比较和交换步骤</p>
-                        </div>
-                        <div class="visualizer-controls">
-                            <button class="control-btn" id="algo-bubble">冒泡排序</button>
-                            <button class="control-btn" id="algo-selection">选择排序</button>
-                        </div>
-                    </div>
-                    
-                    <div class="visualizer-canvas-wrapper" id="visualizer-canvas">
-                        <!-- Bars injected dynamically by playground.js -->
-                    </div>
-                    
-                    <div class="visualizer-settings">
-                        <div class="settings-group">
-                            <label for="range-size">数组大小:</label>
-                            <input type="range" id="range-size" min="10" max="30" value="15">
-                        </div>
-                        <div class="settings-group">
-                            <label for="range-speed">演示速度:</label>
-                            <input type="range" id="range-speed" min="1" max="100" value="70">
-                        </div>
-                        <div style="display: flex; gap: 8px;">
-                            <button class="control-btn" id="btn-start" style="background: var(--primary-color); color: white;"><i class="fas fa-play"></i> 开始</button>
-                            <button class="control-btn" id="btn-pause" disabled><i class="fas fa-pause"></i> 暂停</button>
-                            <button class="control-btn" id="btn-reset"><i class="fas fa-sync-alt"></i> 重置</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Code Tracking Panel -->
-                <div class="code-pane">
-                    <h4>算法代码追踪</h4>
-                    <div class="code-block" id="code-block">
-                        <!-- Code injected dynamically by playground.js -->
-                    </div>
-                    <div class="code-explanation">
-                        <strong>执行日志：</strong>
-                        <p id="explanation" style="margin-top: 5px;">选择左侧控件以启动排序演练。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- 5. Competitions Grid -->
     <section class="competition-section" id="competitions">
@@ -344,6 +292,5 @@
     <!-- Scripts -->
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/playground.js"></script>
 </body>
 </html>
