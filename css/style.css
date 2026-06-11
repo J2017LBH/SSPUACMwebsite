@@ -68,6 +68,10 @@
     --visualizer-bar-compare: #dc2626;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 /* --- Reset & Global styles --- */
 * {
     margin: 0;
@@ -1451,6 +1455,9 @@ footer {
 }
 
 .highlight-award-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1784,6 +1791,7 @@ footer {
     
     .timeline-dot {
         left: 14px !important;
+        right: auto !important;
     }
     
     .timeline-resources {
@@ -1970,12 +1978,14 @@ footer {
     grid-template-columns: repeat(3, 1fr) !important;
     grid-auto-rows: 1fr !important;
     gap: 2.5rem !important;
+    justify-items: center !important;
 }
 
 @media (max-width: 1024px) {
     .outstanding-alumni-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 2rem !important;
+        justify-items: center !important;
     }
 }
 
@@ -1984,6 +1994,7 @@ footer {
         grid-template-columns: 1fr !important;
         grid-auto-rows: auto !important;
         gap: 1.5rem !important;
+        justify-items: center !important;
     }
 }
 
