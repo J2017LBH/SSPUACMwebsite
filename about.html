@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="关于上海第二工业大学程序设计竞赛协会 - 了解我们的师资力量、实验室环境和面向零基础新生的算法成长路线图。">
-    <title>关于协会 - 上海第二工业大学程序设计竞赛协会</title>
+    <meta name="description" content="关于 XCPC 大学生程序设计竞赛 - 了解国际大学生程序设计竞赛（ICPC）与中国大学生程序设计竞赛（CCPC）的赛事背景、历史及历届总冠军荣誉榜。">
+    <title>XCPC 赛事信息 - 大学生程序设计竞赛介绍</title>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <!-- Font Awesome Icons -->
@@ -15,83 +15,136 @@
     <!-- Header navigation injected by components.js -->
     <div id="header-placeholder"></div>
 
-    <!-- 1. Association Introduction Section -->
-    <section class="about-section" id="about-intro">
+    <!-- 1. Page Header (XCPC Title Banner) -->
+    <section class="about-section" id="xcpc-overview" style="padding-bottom: 20px; text-align: center;">
+        <div class="container" style="margin-top: 2rem;">
+            <h1 class="section-title" style="font-size: 2.8rem; margin-bottom: 0.5rem;">XCPC 赛事指南</h1>
+            <p style="color: var(--text-muted); font-size: 1.15rem; max-width: 600px; margin: 0 auto 3rem;">了解全球与全国最顶级的计算机大学生程序设计竞赛</p>
+        </div>
+    </section>
+
+    <!-- 2. About ICPC Section -->
+    <section style="padding: 60px 0; border-top: 1px solid var(--border-color); background: rgba(255, 255, 255, 0.01);">
         <div class="container">
-            <h2 class="section-title">关于我们</h2>
-            <div class="about-intro-text" style="max-width: 800px; margin: 0 auto 80px; text-align: left;">
-                <p>上海第二工业大学程序设计竞赛协会是计算机与信息工程学院下的以算法和编程竞赛为核心的学术科技类社团。协会主要负责组织和指导我校学生参加国际大学生程序设计竞赛（ICPC）、中国大学生程序设计竞赛（CCPC）、团体程序设计天梯赛（GPLT）和蓝桥杯软件设计大赛。</p>
-                <p>我们拥有独立备赛使用的算法训练室28号楼705，室内配备有稳定的千兆网络、专用练习电脑。通过"以赛促学，学赛共进"的模式，发掘和培养优秀的软件设计后备人才。</p>
-                <p>在这里，每一位零基础或已具备一定底子的算法爱好者，都能通过层层磨练，完成从代码小白到金牌选手的华丽蜕变。</p>
+            <div class="about-intro-grid">
+                <div class="about-intro-text">
+                    <span style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-color); font-weight: 700; display: block; margin-bottom: 0.5rem;">Global Championship</span>
+                    <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--text-color); margin-bottom: 1.5rem; line-height: 1.2;">
+                        国际大学生程序设计竞赛 (ICPC)
+                    </h2>
+                    <p>
+                        国际大学生程序设计竞赛（International Collegiate Programming Contest，简称 <strong>ICPC</strong>）是世界上规模最大、水平最高、最受瞩目的年度大学生程序设计竞赛。该赛事代表着全球大学生算法与计算思维竞赛的巅峰，被广泛誉为计算机领域的“奥林匹克”。
+                    </p>
+                    <p>
+                        ICPC 是一项以 3 人团队为单位的编程对抗赛，旨在激发大学生的算法兴趣，并为他们提供一个与全球顶级同辈学者切磋技艺、锻炼抗压协作能力的舞台。该竞赛也是全球各大顶尖企业选拔最顶尖软件研发人才的绝佳“练兵场”。
+                    </p>
+                    <p>
+                        <strong>竞赛规制：</strong>每支参赛团队共 3 名队员，在长达 5 小时的封闭时间内，仅能共用 1 台电脑。团队需要通力协作，设计算法模型解答 10 至 13 道复杂的英文题目。成功通过全部 secret 测试点的队伍会实时获得气球奖励，以解题数最多且用时最短者获胜。
+                    </p>
+                </div>
+                <div class="image-gallery-grid">
+                    <img src="images/icpc1.jpg" alt="ICPC Competition Scene">
+                    <img src="images/icpc2.jpg" alt="ICPC Team Coding">
+                    <img src="images/icpc3.jpg" alt="ICPC Awards Stage">
+                    <img src="images/icpc4.jpg" alt="ICPC Participants Arena">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 2. Interactive Learning Roadmap Section -->
-    <section class="roadmap-section" id="roadmap">
+    <!-- 3. About CCPC Section -->
+    <section style="padding: 60px 0; border-top: 1px solid var(--border-color);">
         <div class="container">
-            <h2 class="section-title">算法选手成长路线图</h2>
-            <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: -2rem auto 3rem;">我们针对零基础同学量身定制的四年阶梯式算法学习成长路线，为你铺平算法竞赛的升级之路。</p>
+            <div class="about-intro-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="image-gallery-grid" style="grid-column: 1; grid-row: 1;">
+                    <img src="images/ccpc1.jpg" alt="CCPC Awards Ceremony">
+                    <img src="images/ccpc2.jpg" alt="CCPC Contest Gym">
+                    <img src="images/ccpc3.jpg" alt="CCPC Active Arena">
+                    <img src="images/ccpc4.jpg" alt="CCPC High-Angle Gym Floor">
+                </div>
+                <div class="about-intro-text" style="grid-column: 2; grid-row: 1;">
+                    <span style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-color); font-weight: 700; display: block; margin-bottom: 0.5rem;">National Arena</span>
+                    <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--text-color); margin-bottom: 1.5rem; line-height: 1.2;">
+                        中国大学生程序设计竞赛 (CCPC)
+                    </h2>
+                    <p>
+                        中国大学生程序设计竞赛（China Collegiate Programming Contest，简称 <strong>CCPC</strong>）是由教育部高等学校计算机类专业教学指导委员会主办的全国性顶级学术赛事。赛事旨在通过精心设计的算法挑战，培养与选拔我国高水平的计算机应用与系统开发人才。
+                    </p>
+                    <p>
+                        CCPC 于 2015 年发起成立。作为中国本土含金量最高的大学生编程竞赛，它不仅完全移植了 ICPC 的顶级裁判系统和竞赛机制，更是针对国内计算机课程教育体系进行了针对性优化，是国内高校在算法人才培养维度的核心评估标准。
+                    </p>
+                    <p>
+                        <strong>竞赛规模：</strong>CCPC 如今已建立了多层级的全国竞赛网络，包含分省赛（Provincial）、全国邀请赛（Invitational）、分站赛（Regional）以及全国总决赛（Final）。每年吸引全国近 500 所一流高校、上万名最顶级的计算机学子参与激烈的现场对抗。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. XCPC History Section -->
+    <section style="padding: 60px 0; border-top: 1px solid var(--border-color); background: rgba(255, 255, 255, 0.01);">
+        <div class="container">
+            <h2 class="section-title">竞赛发展历程</h2>
+            <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: -2rem auto 3rem;">了解 ICPC 与 CCPC 赛事的起源、重要节点及发展演进。</p>
             
-            <div class="roadmap-timeline">
-                <!-- Stage 1 -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>第一阶段：语法基础与电子扫盲</h3>
-                        <p>学习C/C++基础编程语法，熟悉输入输出、循环控制语句、一维/二维数组的应用。学习如何在本地配置VS Code和g++编译器环境，熟练使用基础终端指令。</p>
-                        <div class="timeline-resources">
-                            <span class="resource-tag">C++ Primer Plus</span>
-                            <span class="resource-tag">洛谷 [入门1] 题单</span>
-                            <span class="resource-tag">VS Code 环境配置</span>
-                        </div>
+            <div class="xcpc-timeline">
+                <div class="xcpc-timeline-item">
+                    <div class="xcpc-timeline-dot"></div>
+                    <div class="xcpc-timeline-date">1970</div>
+                    <div class="xcpc-timeline-content">
+                        <h3>首届比赛举办</h3>
+                        <p>首届大学生程序设计比赛在德克萨斯 A&M 大学举办，由 UPE 计算机荣誉学会发起，标志着全球算法竞赛时代的开端。</p>
                     </div>
                 </div>
                 
-                <!-- Stage 2 -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>第二阶段：基础算法与 STL 容器</h3>
-                        <p>掌握排序与检索（二分查找）、高精度计算、前缀和与差分、双指针法和贪心策略。学习并熟练运用C++ Standard Template Library (STL)，如 vector, map, set, queue, stack 等数据结构。</p>
-                        <div class="timeline-resources">
-                            <span class="resource-tag">洛谷 [算法1-1]</span>
-                            <span class="resource-tag">Codeforces Div.3/Div.4</span>
-                            <span class="resource-tag">AtCoder ABC A-C 题</span>
-                        </div>
+                <div class="xcpc-timeline-item">
+                    <div class="xcpc-timeline-dot"></div>
+                    <div class="xcpc-timeline-date">1977</div>
+                    <div class="xcpc-timeline-content">
+                        <h3>世界总决赛成型</h3>
+                        <p>首次 ICPC 世界总决赛（World Finals）在 ACM 计算机科学会议期间成功举行，赛制步入国际规范化，参赛学校迅速扩大。</p>
                     </div>
                 </div>
                 
-                <!-- Stage 3 -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>第三阶段：数据结构与中级算法</h3>
-                        <p>深入学习基础图论（DFS/BFS深度与广度优先搜索、Dijkstra单源最短路径、Kruskal最小生成树）、基础动态规划（背包问题、线性DP）及常用基础数学算法（素数筛、最大公约数、快速幂）。</p>
-                        <div class="timeline-resources">
-                            <span class="resource-tag">《算法竞赛进阶指南》</span>
-                            <span class="resource-tag">AtCoder ABC D-E 题</span>
-                            <span class="resource-tag">Codeforces Div.2 B-C</span>
-                        </div>
+                <div class="xcpc-timeline-item">
+                    <div class="xcpc-timeline-dot"></div>
+                    <div class="xcpc-timeline-date">1989</div>
+                    <div class="xcpc-timeline-content">
+                        <h3>全球总决赛总部建立</h3>
+                        <p>ICPC 总部建立在贝勒大学（Baylor University），由著名教练 Bill Poucher 教授主持，赛事进入真正的全球性扩张阶段。</p>
                     </div>
                 </div>
                 
-                <!-- Stage 4 -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>第四阶段：高级算法与真题实战</h3>
-                        <p>学习高级数据结构（线段树、树状数组、并查集优化、强连通分量）、高级DP（区间DP、状压DP）。研究ICPC/CCPC历年亚洲区域赛真题，磨砺3人组队配合默契、战术分工及应对高压的解题能力。</p>
-                        <div class="timeline-resources">
-                            <span class="resource-tag">ICPC 区域赛真题</span>
-                            <span class="resource-tag">CCPC 组队模拟赛</span>
-                            <span class="resource-tag">模板源程序集锦 (Template)</span>
-                        </div>
+                <div class="xcpc-timeline-item">
+                    <div class="xcpc-timeline-dot"></div>
+                    <div class="xcpc-timeline-date">2000</div>
+                    <div class="xcpc-timeline-content">
+                        <h3>亚洲赛区爆发式增长</h3>
+                        <p>ICPC 亚洲分站赛在国内高校广泛设立，中国选手的参与度大幅提升，并开始在世界总决赛舞台上展露头角，多次夺取全球金牌。</p>
+                    </div>
+                </div>
+                
+                <div class="xcpc-timeline-item">
+                    <div class="xcpc-timeline-dot"></div>
+                    <div class="xcpc-timeline-date">2015</div>
+                    <div class="xcpc-timeline-content">
+                        <h3>中国大学生程序设计竞赛 (CCPC) 创办</h3>
+                        <p>为适应国内算法人才培养需要，国内多所顶尖高校联合创办了 CCPC 赛事，完全对标 ICPC 规则，极大地普及了国内程序设计文化。</p>
+                    </div>
+                </div>
+                
+                <div class="xcpc-timeline-item">
+                    <div class="xcpc-timeline-dot"></div>
+                    <div class="xcpc-timeline-date">2026</div>
+                    <div class="xcpc-timeline-content">
+                        <h3>XCPC 蓬勃发展</h3>
+                        <p>CCPC 迎来了第 11 届赛事体系，ICPC 参与人数与高校数亦打破历史记录。XCPC 依旧是全球和全国最顶级的计算机学子梦寐以求的最高竞技殿堂。</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Footer placeholder injected by components.js -->
     <div id="footer-placeholder"></div>
