@@ -43,11 +43,11 @@ async function initLanqiaoPage() {
     const res = await fetch("data/lanqiao-sspu.json");
     const data = await res.json();
 
-    // 为每个人计算十三届之后的排行数据
+    // 为每个人计算十三届之后的排行数据，过滤掉十三届后无获奖记录的人
     allPersons = data.persons.map(p => {
       const rk = computeRankingStats(p);
       return { ...p, rk };
-    });
+    }).filter(p => p.rk.total > 0);
 
     filteredPersons = [...allPersons];
 
