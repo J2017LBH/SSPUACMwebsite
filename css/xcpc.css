@@ -251,6 +251,7 @@
 
 .xcpc-table tbody tr {
     transition: background 0.15s;
+    cursor: pointer;
 }
 
 .xcpc-table tbody tr:hover {

@@ -317,7 +317,12 @@
         // Player detail click (delegated)
         document.getElementById('players-tbody').addEventListener('click', (e) => {
             const btn = e.target.closest('.xcpc-view-btn');
-            if (btn) openPlayerModal(btn.dataset.key);
+            if (btn) { openPlayerModal(btn.dataset.key); return; }
+            const tr = e.target.closest('tr');
+            if (tr) {
+                const keyBtn = tr.querySelector('.xcpc-view-btn');
+                if (keyBtn) openPlayerModal(keyBtn.dataset.key);
+            }
         });
 
         // Modal close
