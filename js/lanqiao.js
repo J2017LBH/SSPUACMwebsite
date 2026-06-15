@@ -43,16 +43,30 @@ async function initLanqiaoPage() {
     const res = await fetch("data/lanqiao-sspu.json");
     const data = await res.json();
 
-    // 为每个人计算十三届之后的排行数据，过滤掉十三届后无获奖记录的人
+    // 过滤掉十三届（不包含）之前的蓝桥杯个人记录，并过滤掉在十三届后无获奖记录的人
     allPersons = data.persons.map(p => {
-      const rk = computeRankingStats(p);
-      return { ...p, rk };
+      const records = (p.records || []).filter(r => r.edition >= MIN_EDITION);
+      const rk = computeRankingStats({ ...p, records });
+      return { ...p, records, rk, displayRk: rk };
     }).filter(p => p.rk.total > 0);
 
     filteredPersons = [...allPersons];
 
-    renderStats(data.stats); // 统计卡片用总体数据
-    renderEditionOptions(data.stats.byEdition);
+    // 计算仅包含十三届（含）以后的届次列表（用于下拉框筛选）
+    const computedByEdition = {};
+    for (const p of allPersons) {
+      for (const r of (p.records || [])) {
+        const ed = r.editionLabel;
+        if (!computedByEdition[ed]) {
+          computedByEdition[ed] = { total: 0 };
+        }
+        computedByEdition[ed].total++;
+      }
+    }
+
+    // 统计数据卡片展示数据库中所有数据（包含第十三届以前）
+    renderStats(data.stats);
+    renderEditionOptions(computedByEdition);
     renderTable();
     bindEvents();
   } catch (err) {
@@ -83,15 +97,25 @@ function renderStats(stats) {
   `).join("");
 }
 
+function parseChineseEdition(str) {
+  const numStr = str.replace("第", "").replace("届", "");
+  const chnNumChar = {
+    零: 0, 一: 1, 二: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10
+  };
+  if (numStr === "十") return 10;
+  if (numStr.startsWith("十")) {
+    return 10 + (chnNumChar[numStr[1]] || 0);
+  }
+  return chnNumChar[numStr] || 0;
+}
+
 // ---------- 届次筛选选项 ----------
 function renderEditionOptions(byEdition) {
   const select = document.getElementById("lanqiao-edition-filter");
   if (!select) return;
 
   const editions = Object.keys(byEdition).sort((a, b) => {
-    const na = parseInt(a.replace(/[^0-9]/g, ""));
-    const nb = parseInt(b.replace(/[^0-9]/g, ""));
-    return nb - na;
+    return parseChineseEdition(a) - parseChineseEdition(b);
   });
 
   for (const ed of editions) {
@@ -108,13 +132,13 @@ const SORT_PRIORITY = ["nationalFirst", "nationalSecond", "nationalThird", "prov
 function comparePersons(a, b, key, asc) {
   if (key === "default") {
     for (const k of SORT_PRIORITY) {
-      const diff = (b.rk[k] || 0) - (a.rk[k] || 0);
+      const diff = (b.displayRk[k] || 0) - (a.displayRk[k] || 0);
       if (diff !== 0) return diff;
     }
     return 0;
   }
-  const va = a.rk[key] || 0;
-  const vb = b.rk[key] || 0;
+  const va = a.displayRk[key] || 0;
+  const vb = b.displayRk[key] || 0;
   return asc ? va - vb : vb - va;
 }
 
@@ -133,17 +157,16 @@ function renderTable() {
   const page = filteredPersons.slice(start, start + PAGE_SIZE);
 
   tbody.innerHTML = page.map((p, i) => `
-    <tr>
+    <tr class="clickable-row" data-pid="${p.pid}">
       <td>${start + i + 1}</td>
       <td><strong>${escHtml(p.name)}</strong></td>
-      <td>${p.rk.nationalFirst || "-"}</td>
-      <td>${p.rk.nationalSecond || "-"}</td>
-      <td>${p.rk.nationalThird || "-"}</td>
-      <td>${p.rk.provincialFirst || "-"}</td>
-      <td>${p.rk.provincialSecond || "-"}</td>
-      <td>${p.rk.provincialThird || "-"}</td>
-      <td><strong>${p.rk.total}</strong></td>
-      <td><button class="btn-detail" data-pid="${p.pid}"><i class="fas fa-eye"></i></button></td>
+      <td>${p.displayRk.nationalFirst || "-"}</td>
+      <td>${p.displayRk.nationalSecond || "-"}</td>
+      <td>${p.displayRk.nationalThird || "-"}</td>
+      <td>${p.displayRk.provincialFirst || "-"}</td>
+      <td>${p.displayRk.provincialSecond || "-"}</td>
+      <td>${p.displayRk.provincialThird || "-"}</td>
+      <td><strong>${p.displayRk.total}</strong></td>
     </tr>
   `).join("");
 
@@ -170,13 +193,16 @@ function applyFilters() {
   const edition = document.getElementById("lanqiao-edition-filter")?.value || "";
   const award = document.getElementById("lanqiao-award-filter")?.value || "";
 
-  filteredPersons = allPersons.filter(p => {
+  filteredPersons = allPersons.map(p => {
+    const records = edition 
+      ? (p.records || []).filter(r => r.editionLabel === edition)
+      : p.records;
+    const displayRk = computeRankingStats({ ...p, records });
+    return { ...p, displayRk };
+  }).filter(p => {
     if (query && !p.name.toLowerCase().includes(query)) return false;
-    if (award && (p.rk[award] || 0) === 0) return false;
-    if (edition) {
-      const hasEdition = (p.records || []).some(r => r.editionLabel === edition);
-      if (!hasEdition) return false;
-    }
+    if (edition && p.displayRk.total === 0) return false;
+    if (award && (p.displayRk[award] || 0) === 0) return false;
     return true;
   });
 
@@ -276,10 +302,10 @@ function bindEvents() {
     });
   });
 
-  // 详情按钮
+  // 详情行点击跳转
   document.getElementById("lanqiao-body")?.addEventListener("click", e => {
-    const btn = e.target.closest(".btn-detail");
-    if (btn) showDetail(btn.dataset.pid);
+    const row = e.target.closest(".clickable-row");
+    if (row) showDetail(row.dataset.pid);
   });
 
   // 关闭模态框

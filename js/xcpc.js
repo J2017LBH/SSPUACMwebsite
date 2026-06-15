@@ -83,13 +83,12 @@
             const rating = currentLb === 'official' ? (p.ratingOfficial || p.rating) : p.rating;
             const rankClass = p.rank <= 3 ? `xcpc-rank-${p.rank}` : 'xcpc-rank-normal';
             const tierClass = getRatingTierClass(rating);
-            return `<tr>
+            return `<tr class="clickable-row" data-key="${escapeAttr(p.key)}">
                 <td class="col-rank"><span class="xcpc-rank ${rankClass}">${p.rank}</span></td>
                 <td class="col-name"><strong>${escapeHtml(p.name)}</strong></td>
                 <td class="col-rating"><span class="xcpc-rating ${tierClass}">${rating.toFixed(1)}</span></td>
                 <td class="col-contests">${p.contests}</td>
                 <td class="col-medals">${renderMedals(p.medals)}</td>
-                <td class="col-action"><button class="xcpc-view-btn" data-key="${escapeAttr(p.key)}"><i class="fas fa-chart-line"></i></button></td>
             </tr>`;
         }).join('');
     }
@@ -293,13 +292,8 @@
 
         // Player detail click (delegated)
         document.getElementById('players-tbody').addEventListener('click', (e) => {
-            const btn = e.target.closest('.xcpc-view-btn');
-            if (btn) { openPlayerModal(btn.dataset.key); return; }
-            const tr = e.target.closest('tr');
-            if (tr) {
-                const keyBtn = tr.querySelector('.xcpc-view-btn');
-                if (keyBtn) openPlayerModal(keyBtn.dataset.key);
-            }
+            const tr = e.target.closest('.clickable-row');
+            if (tr) openPlayerModal(tr.dataset.key);
         });
 
         // Modal close

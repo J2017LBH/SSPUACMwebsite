@@ -2329,12 +2329,236 @@ footer {
 
 /* ===== 蓝桥杯页面样式 ===== */
 
+.lanqiao-hero {
+    padding: 140px 0 60px;
+    text-align: center;
+    position: relative;
+    background-image: radial-gradient(circle at top, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+}
+
+.lanqiao-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.lanqiao-hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+}
+
+.lanqiao-hero h1 i {
+    color: var(--accent-color);
+    margin-right: 8px;
+    filter: drop-shadow(0 0 10px var(--accent-glow));
+    animation: pulse 2s infinite alternate;
+}
+
+.lanqiao-hero h1 span {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.lanqiao-hero p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+.lanqiao-section {
+    padding: 20px 0;
+}
+
+.stats-section {
+    padding-top: 0;
+}
+
+/* 蓝桥杯统计卡片尺寸与 XCPC 统一 */
+.stats-section .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.25rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stats-section .stat-card {
+    text-align: center;
+    padding: 1.75rem 1.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.stats-section .stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stats-section .stat-card:hover::before {
+    opacity: 1;
+}
+
+.stats-section .stat-card i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s;
+}
+
+.stats-section .stat-card:hover i {
+    transform: scale(1.15);
+}
+
+.stats-section .stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--text-color) 30%, var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stats-section .stat-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 1024px) {
+    .stats-section .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-section .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+.filter-section {
+    padding-top: 0;
+}
+
+.lanqiao-filter-card {
+    padding: 20px 24px;
+    margin-bottom: 32px;
+}
+
+.lanqiao-filter-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+}
+
+.lanqiao-search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 240px;
+}
+
+.lanqiao-search-wrap i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: color var(--transition-speed);
+}
+
+.lanqiao-search-wrap input {
+    width: 100%;
+    padding: 12px 16px 12px 38px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.lanqiao-search-wrap input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.lanqiao-search-wrap input:focus + i {
+    color: var(--primary-color);
+}
+
+.lanqiao-filter-flex select {
+    padding: 12px 20px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    min-width: 150px;
+}
+
+.lanqiao-filter-flex select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.section-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-header h2 i {
+    color: var(--primary-color);
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
 .table-wrap {
     overflow-x: auto;
     border-radius: var(--border-radius-md);
     background: var(--card-bg);
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .lanqiao-table,
@@ -2348,58 +2572,73 @@ footer {
 .lanqiao-table td,
 .lanqiao-detail-table th,
 .lanqiao-detail-table td {
-    padding: 12px 16px;
+    padding: 16px 20px;
     text-align: center;
     border-bottom: 1px solid var(--border-color);
 }
 
 .lanqiao-table thead th,
 .lanqiao-detail-table thead th {
-    background: var(--card-bg);
+    background: rgba(59, 130, 246, 0.06);
     color: var(--text-muted);
     font-weight: 600;
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    position: sticky;
-    top: 0;
-    z-index: 1;
+}
+
+.lanqiao-table tbody tr {
+    transition: background-color 0.2s, transform 0.1s;
+    cursor: pointer;
 }
 
 .lanqiao-table tbody tr:hover {
     background: var(--card-bg-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.lanqiao-table tbody tr:active {
+    transform: scale(0.995);
+    background: rgba(59, 130, 246, 0.08);
 }
 
 .lanqiao-table td:first-child,
 .lanqiao-detail-table td:first-child {
     color: var(--text-muted);
+    font-weight: 600;
 }
 
 .sortable {
     cursor: pointer;
     user-select: none;
-    transition: color 0.2s;
+    transition: color 0.2s, background-color 0.2s;
 }
 
 .sortable:hover {
     color: var(--primary-color);
+    background: rgba(59, 130, 246, 0.1);
 }
 
 .btn-detail {
-    background: none;
-    border: 1px solid var(--border-color);
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
     color: var(--primary-color);
-    padding: 6px 12px;
+    padding: 8px 16px;
     border-radius: var(--border-radius-sm);
     cursor: pointer;
     transition: all 0.2s;
     font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-detail:hover {
     background: var(--primary-color);
     color: #fff;
     border-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-glow);
 }
 
 /* 分页 */
@@ -2408,14 +2647,32 @@ footer {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
     margin-top: 24px;
-    padding: 16px 0;
+    padding: 16px 24px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    backdrop-filter: blur(12px);
 }
 
 .pagination-summary {
     color: var(--text-muted);
     font-size: 0.9rem;
+}
+
+.pagination-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pagination-controls span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .pagination-controls button:disabled {
@@ -2427,13 +2684,24 @@ footer {
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 2000;
     padding: 20px;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .modal-content {
@@ -2442,6 +2710,7 @@ footer {
     max-height: 85vh;
     overflow-y: auto;
     padding: 32px;
+    animation: modalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-header {
@@ -2452,56 +2721,74 @@ footer {
 }
 
 .modal-header h3 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
+    background: linear-gradient(135deg, var(--text-color) 30%, var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .modal-close {
-    background: none;
-    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--input-bg);
     color: var(--text-muted);
-    font-size: 1.8rem;
     cursor: pointer;
-    line-height: 1;
-    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: all 0.2s;
 }
 
 .modal-close:hover {
-    color: var(--text-color);
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #ef4444;
 }
 
 .stats-strip {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
 }
 
 .stat-mini {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px 16px;
-    background: var(--card-bg);
+    padding: 12px 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-sm);
-    min-width: 60px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.stat-mini:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
 .stat-mini strong {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-weight: 800;
     color: var(--primary-color);
 }
 
 .stat-mini span {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
+    margin-top: 2px;
 }
 
 /* 奖项徽章 */
 .award-badge {
     display: inline-block;
-    padding: 3px 10px;
-    border-radius: 12px;
+    padding: 4px 12px;
+    border-radius: 999px;
     font-size: 0.8rem;
     font-weight: 600;
 }
@@ -2509,16 +2796,19 @@ footer {
 .award-gold {
     background: rgba(250, 204, 21, 0.15);
     color: #facc15;
+    border: 1px solid rgba(250, 204, 21, 0.3);
 }
 
 .award-silver {
     background: rgba(148, 163, 184, 0.15);
     color: #94a3b8;
+    border: 1px solid rgba(148, 163, 184, 0.3);
 }
 
 .award-bronze {
     background: rgba(217, 119, 6, 0.15);
     color: #d97706;
+    border: 1px solid rgba(217, 119, 6, 0.3);
 }
 
 /* 蓝桥杯响应式 */
@@ -2532,17 +2822,29 @@ footer {
     .lanqiao-table td,
     .lanqiao-detail-table th,
     .lanqiao-detail-table td {
-        padding: 8px 10px;
+        padding: 10px 8px;
     }
 
     .modal-content {
         padding: 20px;
     }
 
+    .stats-strip {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
     .pagination-bar {
         flex-direction: column;
         align-items: stretch;
         text-align: center;
+        padding: 16px;
+    }
+
+    .pagination-controls {
+        flex-direction: column;
+        gap: 8px;
     }
 }
+
 
