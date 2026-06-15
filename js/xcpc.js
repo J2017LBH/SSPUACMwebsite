@@ -6,6 +6,10 @@
     const DATA_URL = 'data/sspu-data.json';
     let allData = null;
     let currentLb = 'all'; // 'all' or 'official'
+    let currentSort = 'rating'; // 'rating' or 'medals'
+
+    const MEDAL_TIER_WEIGHT = { regional: 3, invitational: 2, provincial: 1 };
+    const MEDAL_WEIGHT = { gold: 300, silver: 20, bronze: 1 };
 
     /* ---- Data Loading ---- */
 
@@ -68,11 +72,27 @@
         return html;
     }
 
+    function medalScore(medals) {
+        if (!medals) return 0;
+        let score = 0;
+        for (const [tier, counts] of Object.entries(medals)) {
+            if (!counts || typeof counts !== 'object') continue;
+            const tierW = MEDAL_TIER_WEIGHT[tier] || 0;
+            score += tierW * ((counts.gold || 0) * MEDAL_WEIGHT.gold + (counts.silver || 0) * MEDAL_WEIGHT.silver + (counts.bronze || 0) * MEDAL_WEIGHT.bronze);
+        }
+        return score;
+    }
+
     function renderPlayers(filter) {
         const tbody = document.getElementById('players-tbody');
         let players = currentLb === 'official'
             ? buildOfficialPlayers()
-            : allData.players;
+            : [...allData.players];
+
+        if (currentSort === 'medals') {
+            players.sort((a, b) => medalScore(b.medals) - medalScore(a.medals) || b.rating - a.rating);
+            players.forEach((p, i) => p.rank = i + 1);
+        }
 
         if (filter) {
             const q = filter.toLowerCase();
@@ -281,6 +301,12 @@
                 currentLb = btn.dataset.lb;
                 renderPlayers(document.getElementById('player-search').value);
             });
+        });
+
+        // Sort select
+        document.getElementById('player-sort').addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            renderPlayers(document.getElementById('player-search').value);
         });
 
         // Search

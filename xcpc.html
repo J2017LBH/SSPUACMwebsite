@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="上海第二工业大学 XCPC 积分数据 - 基于 xcpc-rating 的 SSPU 选手积分排行、比赛记录与统计分析。">
     <meta name="keywords" content="上海第二工业大学, SSPU, XCPC, ICPC, CCPC, 积分, rating, 程序设计竞赛">
-    <title>XCPC 积分 - SSPU ACM</title>
+    <title>XCPC - SSPU ACM</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/xcpc.css">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,7 +17,7 @@
     <!-- Hero -->
     <section class="xcpc-hero">
         <div class="container">
-            <h1>XCPC <span>积分数据</span></h1>
+            <h1>XCPC</h1>
             <p class="xcpc-hero-sub">上海第二工业大学 · 基于 <a href="https://github.com/algoux/xcpc-rating" target="_blank">xcpc-rating</a> 阶梯分算法</p>
             <div class="xcpc-stats-row" id="stats-row">
                 <div class="xcpc-stat glass-card">
@@ -63,6 +63,12 @@
                     <div class="xcpc-leaderboard-toggle">
                         <button class="xcpc-lb-btn active" data-lb="all">全部参赛</button>
                         <button class="xcpc-lb-btn" data-lb="official">仅正式参赛</button>
+                    </div>
+                    <div class="xcpc-sort-wrap">
+                        <select id="player-sort" class="xcpc-sort-select">
+                            <option value="rating">按积分排序</option>
+                            <option value="medals">按奖牌排序</option>
+                        </select>
                     </div>
                 </div>
                 <div class="xcpc-table-wrap">

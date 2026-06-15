@@ -34,7 +34,7 @@ function injectHeader() {
                     <li><a href="index.html" class="nav-link">首页</a></li>
                     <li><a href="about.html" class="nav-link">关于 XCPC</a></li>
                     <li><a href="hall_of_fame.html" class="nav-link">荣誉殿堂</a></li>
-                    <li><a href="xcpc.html" class="nav-link">XCPC 积分</a></li>
+                    <li><a href="xcpc.html" class="nav-link">XCPC</a></li>
                     <li><a href="lanqiao.html" class="nav-link">蓝桥杯</a></li>
                     <li><a href="news.html" class="nav-link">动态公告</a></li>
                 </ul>
@@ -78,7 +78,7 @@ function injectFooter() {
                         <li><a href="index.html">首页</a></li>
                         <li><a href="about.html">关于 XCPC</a></li>
                         <li><a href="hall_of_fame.html">荣誉殿堂</a></li>
-                        <li><a href="xcpc.html">XCPC 积分</a></li>
+                        <li><a href="xcpc.html">XCPC</a></li>
                         <li><a href="news.html">动态公告</a></li>
                     </ul>
                 </div>
