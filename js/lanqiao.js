@@ -20,13 +20,17 @@ function computeRankingStats(person) {
   const stats = { nationalFirst: 0, nationalSecond: 0, nationalThird: 0, provincialFirst: 0, provincialSecond: 0, provincialThird: 0, total: 0 };
   for (const r of (person.records || [])) {
     if (r.edition < MIN_EDITION) continue;
-    if (r.awardCode <= 1) { stats.nationalFirst++; stats.total++; }
-    else if (r.awardCode === 2) {
-      if (r.scopeCode === 2) stats.nationalSecond++;
+    const isNational = r.scopeCode === 2;
+    if (r.awardCode <= 1) {
+      if (isNational) stats.nationalFirst++;
+      else stats.provincialFirst++;
+      stats.total++;
+    } else if (r.awardCode === 2) {
+      if (isNational) stats.nationalSecond++;
       else stats.provincialSecond++;
       stats.total++;
     } else if (r.awardCode === 3) {
-      if (r.scopeCode === 2) stats.nationalThird++;
+      if (isNational) stats.nationalThird++;
       else stats.provincialThird++;
       stats.total++;
     }
