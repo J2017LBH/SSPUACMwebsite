@@ -108,9 +108,12 @@
         return map[cat] || '';
     }
 
-    function getCategoryLabel(cat) {
-        const map = { icpc: 'ICPC', ccpc: 'CCPC', provincial: '省赛' };
-        return map[cat] || cat.toUpperCase();
+    function getCategoryLabel(contest) {
+        if (contest.category === 'provincial') return '省赛';
+        const isInvitational = contest.id && contest.id.includes('invitational');
+        const type = isInvitational ? '邀请赛' : '区域赛';
+        const prefix = contest.category === 'icpc' ? 'ICPC' : 'CCPC';
+        return `${prefix} ${type}`;
     }
 
     function renderContests() {
@@ -121,7 +124,7 @@
             return `<tr>
                 <td class="col-date">${date}</td>
                 <td class="col-contest-name">${escapeHtml(c.title)}</td>
-                <td class="col-category"><span class="xcpc-category ${getCategoryClass(c.category)}">${getCategoryLabel(c.category)}</span></td>
+                <td class="col-category"><span class="xcpc-category ${getCategoryClass(c.category)}">${getCategoryLabel(c)}</span></td>
                 <td class="col-sspu-teams">${c.sspuTeams.length}</td>
                 <td class="col-best-rank"><strong>${bestRank}</strong> / ${c.teamCount}</td>
             </tr>`;

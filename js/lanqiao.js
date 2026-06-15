@@ -4,6 +4,7 @@
  */
 
 const PAGE_SIZE = 20;
+const MIN_EDITION = 13; // 排行从十三届开始统计
 let allPersons = [];
 let filteredPersons = [];
 let currentPage = 1;
@@ -14,14 +15,39 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(initLanqiaoPage, 50);
 });
 
+// 计算十三届及之后的奖项统计（用于排行）
+function computeRankingStats(person) {
+  const stats = { nationalFirst: 0, nationalSecond: 0, nationalThird: 0, provincialFirst: 0, provincialSecond: 0, provincialThird: 0, total: 0 };
+  for (const r of (person.records || [])) {
+    if (r.edition < MIN_EDITION) continue;
+    if (r.awardCode <= 1) { stats.nationalFirst++; stats.total++; }
+    else if (r.awardCode === 2) {
+      if (r.scopeCode === 2) stats.nationalSecond++;
+      else stats.provincialSecond++;
+      stats.total++;
+    } else if (r.awardCode === 3) {
+      if (r.scopeCode === 2) stats.nationalThird++;
+      else stats.provincialThird++;
+      stats.total++;
+    }
+  }
+  return stats;
+}
+
 async function initLanqiaoPage() {
   try {
     const res = await fetch("data/lanqiao-sspu.json");
     const data = await res.json();
-    allPersons = data.persons;
+
+    // 为每个人计算十三届之后的排行数据
+    allPersons = data.persons.map(p => {
+      const rk = computeRankingStats(p);
+      return { ...p, rk };
+    });
+
     filteredPersons = [...allPersons];
 
-    renderStats(data.stats);
+    renderStats(data.stats); // 统计卡片用总体数据
     renderEditionOptions(data.stats.byEdition);
     renderTable();
     bindEvents();
@@ -72,20 +98,19 @@ function renderEditionOptions(byEdition) {
   }
 }
 
-// ---------- 排序 ----------
+// ---------- 排序（排行数据从十三届开始） ----------
 const SORT_PRIORITY = ["nationalFirst", "nationalSecond", "nationalThird", "provincialFirst", "provincialSecond", "provincialThird", "total"];
 
 function comparePersons(a, b, key, asc) {
   if (key === "default") {
-    // 默认排序：国一 > 国二 > 国三 > 省一 > 省二 > 省三 > 总计
     for (const k of SORT_PRIORITY) {
-      const diff = (b[k] || 0) - (a[k] || 0);
+      const diff = (b.rk[k] || 0) - (a.rk[k] || 0);
       if (diff !== 0) return diff;
     }
     return 0;
   }
-  const va = a[key] || 0;
-  const vb = b[key] || 0;
+  const va = a.rk[key] || 0;
+  const vb = b.rk[key] || 0;
   return asc ? va - vb : vb - va;
 }
 
@@ -107,13 +132,13 @@ function renderTable() {
     <tr>
       <td>${start + i + 1}</td>
       <td><strong>${escHtml(p.name)}</strong></td>
-      <td>${p.nationalFirst || "-"}</td>
-      <td>${p.nationalSecond || "-"}</td>
-      <td>${p.nationalThird || "-"}</td>
-      <td>${p.provincialFirst || "-"}</td>
-      <td>${p.provincialSecond || "-"}</td>
-      <td>${p.provincialThird || "-"}</td>
-      <td><strong>${p.total}</strong></td>
+      <td>${p.rk.nationalFirst || "-"}</td>
+      <td>${p.rk.nationalSecond || "-"}</td>
+      <td>${p.rk.nationalThird || "-"}</td>
+      <td>${p.rk.provincialFirst || "-"}</td>
+      <td>${p.rk.provincialSecond || "-"}</td>
+      <td>${p.rk.provincialThird || "-"}</td>
+      <td><strong>${p.rk.total}</strong></td>
       <td><button class="btn-detail" data-pid="${p.pid}"><i class="fas fa-eye"></i></button></td>
     </tr>
   `).join("");
@@ -143,7 +168,7 @@ function applyFilters() {
 
   filteredPersons = allPersons.filter(p => {
     if (query && !p.name.toLowerCase().includes(query)) return false;
-    if (award && (p[award] || 0) === 0) return false;
+    if (award && (p.rk[award] || 0) === 0) return false;
     if (edition) {
       const hasEdition = (p.records || []).some(r => r.editionLabel === edition);
       if (!hasEdition) return false;
