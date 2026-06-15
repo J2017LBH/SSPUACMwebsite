@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="上海第二工业大学 XCPC 积分数据 - 基于 xcpc-rating 的 SSPU 选手积分排行、比赛记录与统计分析。">
+    <meta name="keywords" content="上海第二工业大学, SSPU, XCPC, ICPC, CCPC, 积分, rating, 程序设计竞赛">
+    <title>XCPC - SSPU ACM</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/xcpc.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- Hero -->
+    <section class="xcpc-hero">
+        <div class="container">
+            <div class="xcpc-hero-content">
+                <h1><i class="fas fa-chart-line"></i> <span>XCPC</span> 积分数据</h1>
+                <p class="xcpc-hero-sub">上海第二工业大学 XCPC 选手积分排行与比赛记录，基于 <a href="https://hei-maom.github.io/xcpcrating/" target="_blank" rel="noopener noreferrer">xcpc-rating</a> 阶梯分算法。</p>
+            </div>
+            <div class="xcpc-stats-row" id="stats-row">
+                <div class="xcpc-stat glass-card">
+                    <i class="fas fa-users"></i>
+                    <div class="xcpc-stat-num" id="stat-players">-</div>
+                    <div class="xcpc-stat-label">选手总数</div>
+                </div>
+                <div class="xcpc-stat glass-card">
+                    <i class="fas fa-trophy"></i>
+                    <div class="xcpc-stat-num" id="stat-contests">-</div>
+                    <div class="xcpc-stat-label">参赛场次</div>
+                </div>
+                <div class="xcpc-stat glass-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="xcpc-stat-num" id="stat-top-rating">-</div>
+                    <div class="xcpc-stat-label">最高积分</div>
+                </div>
+                <div class="xcpc-stat glass-card">
+                    <i class="fas fa-medal"></i>
+                    <div class="xcpc-stat-num" id="stat-medals">-</div>
+                    <div class="xcpc-stat-label">奖牌总数</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="xcpc-main">
+        <div class="container">
+            <!-- Tab switcher -->
+            <div class="xcpc-tabs">
+                <button class="xcpc-tab active" data-tab="players"><i class="fas fa-ranking-star"></i> 选手排行</button>
+                <button class="xcpc-tab" data-tab="contests"><i class="fas fa-calendar-days"></i> 比赛列表</button>
+            </div>
+
+            <!-- Players tab -->
+            <div class="xcpc-panel active" id="panel-players">
+                <div class="xcpc-toolbar">
+                    <div class="xcpc-search-wrap">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="player-search" placeholder="搜索选手姓名...">
+                    </div>
+                    <div class="xcpc-leaderboard-toggle">
+                        <button class="xcpc-lb-btn active" data-lb="all">全部参赛</button>
+                        <button class="xcpc-lb-btn" data-lb="official">仅正式参赛</button>
+                    </div>
+                </div>
+                <div class="xcpc-table-wrap">
+                    <table class="xcpc-table" id="players-table">
+                        <thead>
+                            <tr>
+                                <th class="col-rank">排名</th>
+                                <th class="col-name">姓名</th>
+                                <th class="col-rating">积分</th>
+                                <th class="col-contests">参赛</th>
+                                <th class="col-medals">奖牌</th>
+                            </tr>
+                        </thead>
+                        <tbody id="players-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Contests tab -->
+            <div class="xcpc-panel" id="panel-contests">
+                <div class="xcpc-table-wrap">
+                    <table class="xcpc-table" id="contests-table">
+                        <thead>
+                            <tr>
+                                <th class="col-date">日期</th>
+                                <th class="col-contest-name">比赛名称</th>
+                                <th class="col-category">类型</th>
+                                <th class="col-sspu-teams">SSPU 队伍</th>
+                                <th class="col-best-rank">最佳排名</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contests-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Player detail modal -->
+    <div class="xcpc-modal-overlay" id="player-modal">
+        <div class="xcpc-modal glass-card">
+            <button class="xcpc-modal-close" id="modal-close"><i class="fas fa-xmark"></i></button>
+            <div class="xcpc-modal-header">
+                <h2 id="modal-player-name">-</h2>
+                <div class="xcpc-modal-meta">
+                    <span id="modal-player-org"></span>
+                    <span id="modal-player-rating"></span>
+                    <span id="modal-player-contests"></span>
+                </div>
+            </div>
+            <div class="xcpc-modal-body">
+                <div class="xcpc-chart-container" id="rating-chart"></div>
+                <h3>历史战绩</h3>
+                <div class="xcpc-table-wrap">
+                    <table class="xcpc-table xcpc-history-table">
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>比赛</th>
+                                <th>队伍</th>
+                                <th>排名</th>
+                                <th>表现分</th>
+                                <th>积分</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modal-history-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script src="js/xcpc.js"></script>
+</body>
+</html>
