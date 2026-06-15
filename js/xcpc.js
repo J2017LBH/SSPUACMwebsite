@@ -167,7 +167,7 @@
 
         // History table
         const htbody = document.getElementById('modal-history-tbody');
-        const sortedHistory = [...history].sort((a, b) => a.startAt.localeCompare(b.startAt));
+        const sortedHistory = [...history].sort((a, b) => b.startAt.localeCompare(a.startAt));
         htbody.innerHTML = sortedHistory.map(h => {
             const date = h.startAt.slice(0, 10);
             const perf = h.perf != null ? h.perf.toFixed(0) : '—';
@@ -182,8 +182,8 @@
             </tr>`;
         }).join('');
 
-        // Chart
-        renderRatingChart(sortedHistory);
+        // Chart (chronological order)
+        renderRatingChart([...history].sort((a, b) => a.startAt.localeCompare(b.startAt)));
 
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
