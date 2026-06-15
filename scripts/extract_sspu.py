@@ -29,7 +29,10 @@ def main():
     parser = argparse.ArgumentParser(description="Extract SSPU data from xcpcrating")
     parser.add_argument(
         "--xcpc-data",
-        default=r"D:\Code\xcpcrating-main\web\public\data",
+        default=os.environ.get(
+            "XCPC_DATA_PATH",
+            os.path.join(os.path.dirname(__file__), "..", "..", "xcpcrating-main", "web", "public", "data"),
+        ),
         help="Path to xcpcrating exported data directory",
     )
     parser.add_argument(
@@ -61,18 +64,10 @@ def main():
     # rows: [key, name, org, contests, rating]
 
     sspu_keys = set()
-    sspu_players_index = {}
     for row in players_index:
         key, name, org, contests, rating = row[0], row[1], row[2], row[3], row[4]
         if SSPU_KEYWORD in org:
             sspu_keys.add(key)
-            sspu_players_index[key] = {
-                "key": key,
-                "name": name,
-                "org": org,
-                "contests": contests,
-                "rating": rating,
-            }
 
     print(f"Found {len(sspu_keys)} SSPU players")
 

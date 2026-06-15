@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="上海第二工业大学蓝桥杯软件赛获奖数据 — SSPU ACM 蓝桥杯战绩统计与选手排行。">
+    <meta name="keywords" content="上海第二工业大学, SSPU, 蓝桥杯, 获奖, 程序设计竞赛">
+    <title>蓝桥杯获奖数据 - SSPU ACM</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" style="min-height: 50vh;">
+        <div class="container">
+            <div class="hero-text" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <h1><i class="fas fa-trophy" style="color: var(--accent-color);"></i> 蓝桥杯获奖数据</h1>
+                <p>上海第二工业大学在蓝桥杯软件赛中的历史获奖记录，数据来源于蓝桥杯 Finder。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计概览 -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="stats-grid" id="lanqiao-stats"></div>
+        </div>
+    </section>
+
+    <!-- 筛选与搜索 -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="glass-card" style="padding: 24px; margin-bottom: 32px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+                    <input type="text" id="lanqiao-search" placeholder="搜索选手姓名..."
+                        style="flex: 1; min-width: 200px; padding: 10px 16px; border-radius: var(--border-radius-sm);
+                               border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-color);
+                               font-size: 0.95rem; outline: none; transition: border-color 0.3s;">
+                    <select id="lanqiao-edition-filter"
+                        style="padding: 10px 16px; border-radius: var(--border-radius-sm);
+                               border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-color);
+                               font-size: 0.95rem; outline: none; cursor: pointer;">
+                        <option value="">全部届次</option>
+                    </select>
+                    <select id="lanqiao-award-filter"
+                        style="padding: 10px 16px; border-radius: var(--border-radius-sm);
+                               border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-color);
+                               font-size: 0.95rem; outline: none; cursor: pointer;">
+                        <option value="">全部奖项</option>
+                        <option value="nationalFirst">国一</option>
+                        <option value="nationalSecond">国二</option>
+                        <option value="nationalThird">国三</option>
+                        <option value="provincialFirst">省一</option>
+                        <option value="provincialSecond">省二</option>
+                        <option value="provincialThird">省三</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 选手排行榜 -->
+            <div class="section-title">
+                <h2><i class="fas fa-medal"></i> 选手排行</h2>
+            </div>
+            <div class="table-wrap" style="overflow-x: auto;">
+                <table class="lanqiao-table" id="lanqiao-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>姓名</th>
+                            <th class="sortable" data-sort="nationalFirst">国一</th>
+                            <th class="sortable" data-sort="nationalSecond">国二</th>
+                            <th class="sortable" data-sort="nationalThird">国三</th>
+                            <th class="sortable" data-sort="provincialFirst">省一</th>
+                            <th class="sortable" data-sort="provincialSecond">省二</th>
+                            <th class="sortable" data-sort="provincialThird">省三</th>
+                            <th class="sortable" data-sort="total">总计</th>
+                            <th>详情</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lanqiao-body"></tbody>
+                </table>
+            </div>
+
+            <!-- 分页 -->
+            <div class="pagination-bar" id="lanqiao-pagination">
+                <div class="pagination-summary" id="lanqiao-page-summary"></div>
+                <div class="pagination-controls" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center;">
+                    <button class="btn btn-secondary" id="lanqiao-prev" style="padding: 8px 16px;">上一页</button>
+                    <span id="lanqiao-page-info" style="color: var(--text-muted);"></span>
+                    <button class="btn btn-secondary" id="lanqiao-next" style="padding: 8px 16px;">下一页</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 选手详情模态框 -->
+    <div id="lanqiao-modal" class="modal-overlay" style="display: none;">
+        <div class="glass-card modal-content">
+            <div class="modal-header">
+                <h3 id="modal-name"></h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="stats-strip" id="modal-stats"></div>
+                <div class="table-wrap" style="overflow-x: auto;">
+                    <table class="lanqiao-detail-table">
+                        <thead>
+                            <tr>
+                                <th>届次</th>
+                                <th>赛段</th>
+                                <th>赛区</th>
+                                <th>排名</th>
+                                <th>科目</th>
+                                <th>奖项</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modal-records"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/components.js"></script>
+    <script src="js/lanqiao.js"></script>
+</body>
+</html>

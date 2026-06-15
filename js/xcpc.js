@@ -141,7 +141,7 @@
         const modal = document.getElementById('player-modal');
 
         document.getElementById('modal-player-name').textContent = player.name;
-        document.getElementById('modal-player-org').innerHTML = `<i class="fas fa-school"></i> ${player.org}`;
+        document.getElementById('modal-player-org').innerHTML = `<i class="fas fa-school"></i> ${escapeHtml(player.org)}`;
         document.getElementById('modal-player-rating').innerHTML = `<i class="fas fa-chart-line"></i> 积分 ${player.rating.toFixed(1)}`;
         document.getElementById('modal-player-contests').innerHTML = `<i class="fas fa-flag"></i> ${player.contests} 场比赛`;
 
@@ -150,8 +150,8 @@
         const sortedHistory = [...history].sort((a, b) => a.startAt.localeCompare(b.startAt));
         htbody.innerHTML = sortedHistory.map(h => {
             const date = h.startAt.slice(0, 10);
-            const perf = h.perf ? h.perf.toFixed(0) : '—';
-            const ratingAfter = h.rating_after ? h.rating_after.toFixed(1) : '—';
+            const perf = h.perf != null ? h.perf.toFixed(0) : '—';
+            const ratingAfter = h.rating_after != null ? h.rating_after.toFixed(1) : '—';
             return `<tr>
                 <td>${date}</td>
                 <td>${escapeHtml(h.title)}</td>
@@ -173,6 +173,7 @@
         const modal = document.getElementById('player-modal');
         modal.classList.remove('open');
         document.body.style.overflow = '';
+        if (resizeObserver) { resizeObserver.disconnect(); resizeObserver = null; }
         if (chartInstance) {
             chartInstance.dispose();
             chartInstance = null;
@@ -181,13 +182,14 @@
 
     function renderRatingChart(history) {
         const container = document.getElementById('rating-chart');
+        if (resizeObserver) { resizeObserver.disconnect(); resizeObserver = null; }
         if (chartInstance) chartInstance.dispose();
         chartInstance = echarts.init(container);
 
         const ratedHistory = history.filter(h => h.rating_after != null);
         const dates = ratedHistory.map(h => h.startAt.slice(0, 10));
         const ratings = ratedHistory.map(h => h.rating_after);
-        const perfs = ratedHistory.map(h => h.perf || null);
+        const perfs = ratedHistory.map(h => h.perf != null ? h.perf : null);
         const titles = ratedHistory.map(h => h.title);
 
         const option = {
@@ -254,7 +256,7 @@
         chartInstance.setOption(option);
 
         // Resize handler
-        const resizeObserver = new ResizeObserver(() => chartInstance.resize());
+        resizeObserver = new ResizeObserver(() => chartInstance.resize());
         resizeObserver.observe(container);
     }
 
