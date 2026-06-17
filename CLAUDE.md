@@ -13,10 +13,6 @@ SSPU ACM 官网 — 上海第二工业大学程序设计竞赛协会的静态网
 start index.html                          # 直接浏览器打开
 python -m http.server 8080                # Python HTTP 服务器
 # 或使用 VS Code Live Server 插件
-
-# Docker 部署
-docker build -t acmwebsite .
-docker run -p 8080:80 acmwebsite
 ```
 
 ## Architecture
