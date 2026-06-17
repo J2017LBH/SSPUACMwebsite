@@ -512,36 +512,36 @@ header.scrolled .navbar {
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .stat-card {
     text-align: center;
-    padding: 4rem 2.5rem;
+    padding: 2.5rem 1.5rem;
 }
 
 .stat-card i {
-    font-size: 3.5rem;
+    font-size: 2rem;
     color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 12px var(--primary-glow));
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 8px var(--primary-glow));
 }
 
 .stat-number {
-    font-size: 4.5rem;
+    font-size: 3rem;
     font-weight: 800;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     background: linear-gradient(135deg, var(--text-color), var(--primary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .stat-label {
-    font-size: 1.15rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
 }
 
 /* Mission / Core Features Section */
@@ -2380,18 +2380,18 @@ footer {
     padding-top: 0;
 }
 
-/* 统计卡片样式 */
+/* 统计卡片样式 - 默认为蓝桥杯页面的小尺寸 */
 .stats-section .stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.25rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .stats-section .stat-card {
     text-align: center;
-    padding: 4rem 2.5rem;
+    padding: 1.75rem 1.25rem;
     position: relative;
     overflow: hidden;
 }
@@ -2417,10 +2417,9 @@ footer {
 }
 
 .stats-section .stat-card i {
-    font-size: 3.5rem;
+    font-size: 1.5rem;
     color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 12px var(--primary-glow));
+    margin-bottom: 0.5rem;
     transition: transform 0.3s;
 }
 
@@ -2429,6 +2428,52 @@ footer {
 }
 
 .stats-section .stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--text-color) 30%, var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stats-section .stat-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 首页统计卡片 - 大尺寸 */
+.stats-section.stats-section-home .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stats-section.stats-section-home .stat-card {
+    text-align: center;
+    padding: 4rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section.stats-section-home .stat-card i {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 12px var(--primary-glow));
+    transition: transform 0.3s;
+}
+
+.stats-section.stats-section-home .stat-card:hover i {
+    transform: scale(1.15);
+}
+
+.stats-section.stats-section-home .stat-number {
     font-size: 4.5rem;
     font-weight: 800;
     background: linear-gradient(135deg, var(--text-color) 30%, var(--primary-color));
@@ -2438,7 +2483,7 @@ footer {
     margin-bottom: 0.75rem;
 }
 
-.stats-section .stat-label {
+.stats-section.stats-section-home .stat-label {
     color: var(--text-muted);
     font-size: 1.15rem;
     font-weight: 500;
