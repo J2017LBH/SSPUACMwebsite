@@ -5,7 +5,7 @@
 
     const DATA_URL = 'data/sspu-data.json';
     let allData = null;
-    let currentLb = 'all'; // 'all' or 'official'
+    let currentLb = 'official'; // 'all' or 'official'
 
     /* ---- Data Loading ---- */
 
